@@ -1,0 +1,277 @@
+:root {
+  --accent: #c0392b;
+  --dark: #2c3e50;
+  --muted: #7f8c8d;
+  --image-height: 320px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial;
+  line-height: 1.5;
+  color: var(--dark);
+  margin: 0;
+}
+
+.container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 1rem;
+}
+
+.site-header {
+  background: #fff;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, .06);
+  position: sticky;
+  top: 0;
+  z-index: 20;
+}
+
+.nav-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.5rem 1rem;
+}
+
+.logo {
+  font-weight: 700;
+  font-size: 1.2rem;
+  color: var(--accent);
+}
+
+.main-nav a {
+  margin-left: 1rem;
+  text-decoration: none;
+  color: var(--dark);
+}
+
+.nav-toggle {
+  display: none;
+  background: none;
+  border: 0;
+  font-size: 1.4rem;
+}
+
+.hero {
+  position: relative;
+  overflow: hidden;
+}
+
+.hero img {
+  width: 100%;
+  height: var(--image-height);
+  object-fit: cover;
+  filter: brightness(.6);
+}
+
+.hero-content {
+  position: absolute;
+  left: 50%;
+  top: 30%;
+  transform: translateX(-50%);
+  width: 100%;
+  max-width: 800px;
+  padding: 0 1rem;
+  text-align: center;
+  color: #fff;
+}
+
+.hero-content h1 {
+  font-size: 2.6rem;
+  margin: .2rem 0;
+}
+
+.btn {
+  display: inline-block;
+  background: var(--accent);
+  color: #fff;
+  padding: .6rem 1rem;
+  border-radius: 6px;
+  text-decoration: none;
+}
+
+.intro {
+  padding: 2rem 1rem;
+}
+
+.gallery {
+  padding: 2rem 1rem;
+}
+
+.slider {
+  position: relative;
+  overflow: hidden;
+}
+
+.slides {
+  display: flex;
+  transition: transform .5s ease;
+}
+
+.slides img {
+  width: 100%;
+  flex: 0 0 100%;
+  height: var(--image-height);
+  object-fit: cover;
+}
+
+.prev,
+.next {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(0, 0, 0, .4);
+  color: #fff;
+  border: 0;
+  padding: .6rem .9rem;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.prev {
+  left: .5rem;
+}
+
+.next {
+  right: .5rem;
+}
+
+.cards {
+  display: flex;
+  gap: 1rem;
+}
+
+.card {
+  flex: 1;
+  padding: 1rem;
+  border-radius: 8px;
+  background: #fff;
+  box-shadow: 0 1px 6px rgba(0, 0, 0, .06);
+}
+
+.menu-grid {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.menu-card {
+  flex: 1;
+  background: #fff;
+  padding: 1rem;
+  border-radius: 8px;
+  box-shadow: 0 1px 6px rgba(0, 0, 0, .06);
+}
+
+.menu-card ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.menu-card li {
+  display: flex;
+  justify-content: space-between;
+  padding: .4rem 0;
+  border-bottom: 1px dashed #eee;
+}
+
+.menu-table table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+}
+
+.menu-table th,
+.menu-table td {
+  padding: .6rem;
+  border-bottom: 1px solid #eee;
+  text-align: left;
+}
+
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.contact-form label {
+  display: block;
+  margin-top: .6rem;
+}
+
+.contact-form input,
+.contact-form textarea {
+  width: 100%;
+  padding: .6rem;
+  margin-top: .2rem;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+}
+
+.site-footer {
+  background: #f8f9fa;
+  padding: 1.5rem 0;
+  margin-top: 2rem;
+}
+
+.footer-grid {
+  display: flex;
+  gap: 1rem;
+}
+
+.copyright {
+  text-align: center;
+  padding: .8rem 0;
+  color: var(--muted);
+}
+
+/* Responsive */
+@media (max-width: 800px) {
+  .cards {
+    flex-direction: column;
+  }
+
+  .menu-grid {
+    flex-direction: column;
+  }
+
+  .contact-grid {
+    grid-template-columns: 1fr;
+  }
+
+  :root {
+    --image-height: 200px;
+  }
+}
+
+@media (max-width: 700px) {
+  .main-nav {
+    position: absolute;
+    right: 1rem;
+    top: 60px;
+    background: #fff;
+    padding: 1rem;
+    border-radius: 6px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, .08);
+    display: none;
+  }
+
+  .main-nav.show {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .nav-toggle {
+    display: block;
+  }
+
+  /* image height controlled via --image-height for consistent sizing */
+  .hero-content h1 {
+    font-size: 1.6rem;
+  }
+}
