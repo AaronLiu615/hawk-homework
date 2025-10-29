@@ -186,11 +186,13 @@ body {
   margin-top: 1rem;
 }
 
-.menu-table th,
+.menu-table thead {
+  display: none;
+}
+
 .menu-table td {
-  padding: .6rem;
+  padding: 0;
   border-bottom: 1px solid #eee;
-  text-align: left;
 }
 
 .contact-grid {
@@ -230,7 +232,198 @@ body {
   color: var(--muted);
 }
 
-/* Responsive */
+.cart-icon {
+  position: relative;
+  cursor: pointer;
+  font-size: 1.5rem;
+  margin-left: 1rem;
+}
+
+.cart-count {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  background: var(--accent);
+  color: white;
+  border-radius: 50%;
+  padding: 0.2rem 0.5rem;
+  font-size: 0.8rem;
+}
+
+.cart-modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  max-width: 400px;
+  background: white;
+  box-shadow: -2px 0 8px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  transition: transform 0.3s ease-in-out;
+}
+
+.cart-modal.show {
+  display: block;
+}
+
+.cart-content {
+  padding: 1rem;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.cart-content h2 {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 0;
+}
+
+.close-cart {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  padding: 0.5rem;
+}
+
+.cart-items {
+  flex-grow: 1;
+  overflow-y: auto;
+}
+
+.cart-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 0;
+  border-bottom: 1px solid #eee;
+}
+
+.cart-item-info {
+  flex-grow: 1;
+}
+
+.cart-item-quantity {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.cart-item-quantity button {
+  background: none;
+  border: 1px solid #ddd;
+  padding: 0.2rem 0.5rem;
+  cursor: pointer;
+}
+
+.cart-summary {
+  position: sticky;
+  bottom: 0;
+  background: white;
+  padding: 1rem;
+  margin: 0 -1rem -1rem -1rem;
+  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.cart-total {
+  display: flex;
+  justify-content: space-between;
+  font-weight: bold;
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+  padding-bottom: 1rem;
+  border-bottom: 2px solid #eee;
+}
+
+.clear-cart-btn {
+  width: 100%;
+  padding: 1rem;
+  background: var(--accent);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 1rem;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.clear-cart-btn::before {
+  content: "🗑️";
+}
+
+.clear-cart-btn:hover {
+  background: #a93226;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.clear-cart-btn:active {
+  transform: translateY(0);
+  box-shadow: none;
+}
+
+.add-to-cart-btn {
+  width: 100%;
+  background: none;
+  border: 1px solid #eee;
+  padding: 0.8rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  font-size: inherit;
+  color: inherit;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+}
+
+.add-to-cart-btn span:first-child {
+  flex: 1;
+  text-align: left;
+  margin-right: 0.5rem;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.add-to-cart-btn::before {
+  content: "🛒";
+  color: var(--accent);
+  font-size: 1em;
+  margin: 0 0.5rem;
+}
+
+.add-to-cart-btn .price {
+  white-space: nowrap;
+  text-align: right;
+  min-width: 4rem;
+  margin-left: auto;
+  font-weight: 500;
+}
+
+.add-to-cart-btn:hover {
+  background-color: rgba(192, 57, 43, 0.05);
+  border-color: var(--accent);
+  transform: translateY(-1px);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.remove-item {
+  background: none;
+  border: none;
+  color: var(--accent);
+  cursor: pointer;
+  padding: 0.2rem 0.5rem;
+}
+
 @media (max-width: 800px) {
   .cards {
     flex-direction: column;
@@ -246,6 +439,13 @@ body {
 
   :root {
     --image-height: 200px;
+  }
+}
+
+@media (max-width: 600px) {
+  .cart-modal {
+    width: 100%;
+    max-width: none;
   }
 }
 
@@ -270,7 +470,6 @@ body {
     display: block;
   }
 
-  /* image height controlled via --image-height for consistent sizing */
   .hero-content h1 {
     font-size: 1.6rem;
   }

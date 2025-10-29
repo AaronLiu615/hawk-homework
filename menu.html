@@ -9,7 +9,7 @@
 <body>
   <header class="site-header">
     <div class="container nav-row">
-  <div class="logo">Hunter Web Cafe</div>
+      <div class="logo">Hunter Web Cafe</div>
       <button id="nav-toggle-2" class="nav-toggle" aria-label="Toggle navigation">☰</button>
       <nav id="main-nav-2" class="main-nav">
         <a href="index.html">Home</a>
@@ -17,8 +17,26 @@
         <a href="about.html">About</a>
         <a href="contact.html">Contact</a>
       </nav>
+      <div class="cart-icon" id="cartIcon">
+        🛒 <span class="cart-count" id="cartCount">0</span>
+      </div>
     </div>
   </header>
+
+  <div id="cartModal" class="cart-modal">
+    <div class="cart-content">
+      <h2>Your Cart <button class="close-cart" id="closeCart">&times;</button></h2>
+      <div id="cartItems" class="cart-items">
+      </div>
+      <div class="cart-summary">
+        <div class="cart-total">
+          <span>Total:</span>
+          <span id="cartTotal">$0.00</span>
+        </div>
+        <button id="clearCart" class="clear-cart-btn">Clear Cart</button>
+      </div>
+    </div>
+  </div>
 
   <main class="container">
   <h1>Hunter Web Cafe Menu</h1>
@@ -28,42 +46,111 @@
       <div class="menu-card">
         <h3>Breakfast & Toasts</h3>
         <ul>
-          <li><span>Avocado Toast</span><span class="price">$8</span></li>
-          <li><span>Greek Yogurt & Granola</span><span class="price">$7</span></li>
-          <li><span>Breakfast Croissant</span><span class="price">$6</span></li>
+          <li>
+            <button class="add-to-cart-btn" data-name="Avocado Toast" data-price="8">
+              <span>Avocado Toast</span><span class="price">$8</span>
+            </button>
+          </li>
+          <li>
+            <button class="add-to-cart-btn" data-name="Greek Yogurt & Granola" data-price="7">
+              <span>Greek Yogurt & Granola</span><span class="price">$7</span>
+            </button>
+          </li>
+          <li>
+            <button class="add-to-cart-btn" data-name="Breakfast Croissant" data-price="6">
+              <span>Breakfast Croissant</span><span class="price">$6</span>
+            </button>
+          </li>
         </ul>
       </div>
       <div class="menu-card">
         <h3>Sandwiches & Bowls</h3>
         <ul>
-          <li><span>Smoked Turkey Panini</span><span class="price">$11</span></li>
-          <li><span>Caprese Sandwich</span><span class="price">$10</span></li>
-          <li><span>Quinoa Bowl</span><span class="price">$12</span></li>
+          <li>
+            <button class="add-to-cart-btn" data-name="Smoked Turkey Panini" data-price="11">
+              <span>Smoked Turkey Panini</span><span class="price">$11</span>
+            </button>
+          </li>
+          <li>
+            <button class="add-to-cart-btn" data-name="Caprese Sandwich" data-price="10">
+              <span>Caprese Sandwich</span><span class="price">$10</span>
+            </button>
+          </li>
+          <li>
+            <button class="add-to-cart-btn" data-name="Quinoa Bowl" data-price="12">
+              <span>Quinoa Bowl</span><span class="price">$12</span>
+            </button>
+          </li>
         </ul>
       </div>
       <div class="menu-card">
         <h3>Pastries & Sweets</h3>
         <ul>
-          <li><span>Almond Croissant</span><span class="price">$4</span></li>
-          <li><span>Chocolate Muffin</span><span class="price">$3.5</span></li>
-          <li><span>Fruit Tart</span><span class="price">$5</span></li>
+          <li>
+            <button class="add-to-cart-btn" data-name="Almond Croissant" data-price="4">
+              <span>Almond Croissant</span><span class="price">$4</span>
+            </button>
+          </li>
+          <li>
+            <button class="add-to-cart-btn" data-name="Chocolate Muffin" data-price="3.5">
+              <span>Chocolate Muffin</span><span class="price">$3.5</span>
+            </button>
+          </li>
+          <li>
+            <button class="add-to-cart-btn" data-name="Fruit Tart" data-price="5">
+              <span>Fruit Tart</span><span class="price">$5</span>
+            </button>
+          </li>
         </ul>
       </div>
     </section>
 
     <section class="menu-table">
-      <h2>Coffee Selections</h2>
+      <h3>Coffee Selections</h3>
       <table>
-        <thead>
-          <tr><th>Item</th><th>Price</th></tr>
-        </thead>
         <tbody>
-          <tr><td>Espresso</td><td>$2.50</td></tr>
-          <tr><td>Americano</td><td>$3.00</td></tr>
-          <tr><td>Latte</td><td>$4.00</td></tr>
-          <tr><td>Cappuccino</td><td>$4.00</td></tr>
-          <tr><td>Mocha</td><td>$4.50</td></tr>
-          <tr><td>Iced Coffee</td><td>$3.50</td></tr>
+          <tr>
+            <td colspan="2">
+              <button class="add-to-cart-btn" data-name="Espresso" data-price="2.50">
+                <span>Espresso</span><span class="price">$2.50</span>
+              </button>
+            </td>
+          </tr>
+          <tr>
+            <td colspan="2">
+              <button class="add-to-cart-btn" data-name="Americano" data-price="3.00">
+                <span>Americano</span><span class="price">$3.00</span>
+              </button>
+            </td>
+          </tr>
+          <tr>
+            <td colspan="2">
+              <button class="add-to-cart-btn" data-name="Latte" data-price="4.00">
+                <span>Latte</span><span class="price">$4.00</span>
+              </button>
+            </td>
+          </tr>
+          <tr>
+            <td colspan="2">
+              <button class="add-to-cart-btn" data-name="Cappuccino" data-price="4.00">
+                <span>Cappuccino</span><span class="price">$4.00</span>
+              </button>
+            </td>
+          </tr>
+          <tr>
+            <td colspan="2">
+              <button class="add-to-cart-btn" data-name="Mocha" data-price="4.50">
+                <span>Mocha</span><span class="price">$4.50</span>
+              </button>
+            </td>
+          </tr>
+          <tr>
+            <td colspan="2">
+              <button class="add-to-cart-btn" data-name="Iced Coffee" data-price="3.50">
+                <span>Iced Coffee</span><span class="price">$3.50</span>
+              </button>
+            </td>
+          </tr>
         </tbody>
       </table>
     </section>
