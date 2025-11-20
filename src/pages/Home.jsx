@@ -5,7 +5,7 @@ export default function Home(){
   return (
     <div>
       <section className="hero hero-full mb-4">
-        <img src="/images/coffee_bar.jpg" alt="Banner" style={{width:'100%', height:320, objectFit:'cover', filter:'brightness(.6)'}} />
+        <img src={`${import.meta.env.BASE_URL}images/coffee_bar.jpg`} alt="Banner" style={{width:'100%', height:320, objectFit:'cover', filter:'brightness(.6)'}} />
         <div className="hero-content text-center text-white">
           <h1 className="display-5">Hunter Web Cafe</h1>
           <p className="lead">Warm coffee. Fresh pastries. Cozy conversations.</p>
@@ -21,12 +21,12 @@ export default function Home(){
         <h2>Gallery</h2>
         <PictureSlider
           images={[
-            '/images/brunch_table.png',
-            '/images/coffee.jpg',
-            '/images/bagel.png',
-            '/images/sandwich.png',
-            '/images/salad.png',
-            '/images/brunch.png',
+            `${import.meta.env.BASE_URL}images/brunch_table.png`,
+            `${import.meta.env.BASE_URL}images/coffee.jpg`,
+            `${import.meta.env.BASE_URL}images/bagel.png`,
+            `${import.meta.env.BASE_URL}images/sandwich.png`,
+            `${import.meta.env.BASE_URL}images/salad.png`,
+            `${import.meta.env.BASE_URL}images/brunch.png`,
           ]}
           autoPlay={false}
         />
