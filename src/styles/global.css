@@ -1,0 +1,114 @@
+/* Global overrides for the React app. We import the original site CSS as well. */
+html { font-size: 112.5%; }
+body {
+  background: #fff;
+}
+
+/* Center hero content over the image */
+.hero { position: relative; }
+.hero-content { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 100%; padding: 0 1rem; pointer-events: auto }
+
+/* Responsive tweaks */
+.hero img { height: 320px; object-fit: cover; width: 100%; }
+
+@media (max-width: 800px) {
+  .hero img { height: 220px }
+  .nav-mobile { position: absolute; left: 0; right: 0; top: 60px; background: #fff; padding: 0.5rem 1rem; box-shadow: 0 6px 20px rgba(0,0,0,.08); }
+  .hero-content { transform: translate(-50%, -45%); }
+}
+
+@media (max-width: 480px) {
+  .hero img { height: 180px }
+  .hero-content { transform: translate(-50%, -40%); padding: 0 0.8rem }
+  .navbar-brand { font-size: 1rem }
+}
+
+/* Cart modal styling */
+.app-cart-modal {
+  position: fixed;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: 360px;
+  background: #fff;
+  box-shadow: -2px 0 8px rgba(0,0,0,.12);
+  z-index: 1050;
+  display: flex;
+  flex-direction: column;
+}
+.app-cart-items { padding: 16px; overflow-y: auto; flex: 1 }
+
+@media (max-width: 700px) {
+  .app-cart-modal {
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+  }
+  .app-cart-modal .p-3 { padding: 1rem }
+}
+
+/* Menu cards responsive */
+.menu-grid .card { min-height: 120px }
+
+/* Make the header cart button icon background transparent (override bootstrap) */
+.app-cart-btn {
+  background: transparent !important;
+  border-color: transparent !important;
+  box-shadow: none !important;
+  color: inherit;
+  padding: 0.35rem 0.6rem;
+}
+.app-cart-btn:focus { outline: none; box-shadow: none }
+.app-cart-btn .badge { transform: translate(30%, -30%); }
+
+/* Picture slider styles */
+.picture-slider { position: relative; overflow: hidden; width: 100%; max-width: 900px; margin: 0 auto; }
+.picture-slider .slides { display: flex; transition: transform 480ms ease; will-change: transform; }
+.picture-slider .slide { min-width: 100%; box-sizing: border-box; display: flex; align-items: center; justify-content: center; }
+.picture-slider .slide img { width: 100%; height: 260px; object-fit: cover; display: block; }
+
+.picture-slider .slider-btn { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(0,0,0,0.45); color: #fff; border: none; width: 40px; height: 40px; border-radius: 20px; display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 20px; z-index: 10; }
+.picture-slider .slider-btn.prev { left: 12px }
+.picture-slider .slider-btn.next { right: 12px }
+.picture-slider .slider-btn:focus { outline: 2px solid rgba(255,255,255,0.6) }
+
+.picture-slider .slider-dots { position: absolute; left: 50%; transform: translateX(-50%); bottom: 10px; display: flex; gap: 8px; z-index: 10 }
+.picture-slider .dot { width: 10px; height: 10px; border-radius: 50%; background: rgba(255,255,255,0.6); border: none; padding: 0; cursor: pointer }
+.picture-slider .dot.active { background: #fff; box-shadow: 0 0 0 4px rgba(0,0,0,0.12) }
+
+@media (max-width: 800px){
+  .picture-slider .slide img { height: 180px }
+}
+
+/* Make the hero/banner full-bleed even when inside a centered container */
+.hero-full {
+  width: 100vw;
+  position: relative;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+  box-sizing: border-box;
+}
+.hero-full .hero-content { max-width: 1200px; margin-left: auto; margin-right: auto; }
+
+
+/* Simple toast notification */
+.app-toast {
+  position: fixed;
+  right: 20px;
+  bottom: 24px;
+  background: rgba(0,0,0,0.85);
+  color: #fff;
+  padding: 10px 14px;
+  border-radius: 8px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.25);
+  z-index: 2000;
+  font-weight: 600;
+  pointer-events: none;
+}
+
+
+
+

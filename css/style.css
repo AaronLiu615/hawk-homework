@@ -5,6 +5,9 @@
   --image-height: 320px;
 }
 
+/* Slightly increase base font size for the legacy site pages */
+html { font-size: 112.5%; }
+
 * {
   box-sizing: border-box;
 }
