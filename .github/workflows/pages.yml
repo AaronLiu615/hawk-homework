@@ -22,7 +22,7 @@ jobs:
           node-version: 18
 
       - name: Install dependencies
-        run: npm install
+        run: npm ci
 
       - name: Set VITE_BASE_URL
         run: echo "VITE_BASE_URL=/${{ github.event.repository.name }}/" >> $GITHUB_ENV
@@ -36,6 +36,3 @@ jobs:
           branch: gh-pages
           folder: dist
           clean: true
-
-
-    # TODO: deploy issue?
