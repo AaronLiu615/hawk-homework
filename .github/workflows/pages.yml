@@ -1,22 +1,22 @@
-name: Build and deploy to GitHub Pages
+name: Build and Deploy to GitHub Pages
 
 on:
   push:
     branches:
-      - main
+      - main  # deploys whenever main branch is pushed
 
 permissions:
   contents: write
 
 jobs:
-  build-and-deploy:
+  deploy:
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
-          fetch-depth: 0
+          fetch-depth: 0  # needed to push to gh-pages
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -26,16 +26,23 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      # Set correct base URL for Vite
+      # Set correct VITE_BASE_URL
       - name: Set VITE_BASE_URL
-        run: echo "VITE_BASE_URL=/${{ github.event.repository.name }}/" >> $GITHUB_ENV
+        run: echo "VITE_BASE_URL=/${{ github.repository }}/" >> $GITHUB_ENV
 
-      - name: Build project
+      - name: Build
         run: npm run build
 
-      - name: Deploy to GitHub Pages
-        uses: JamesIves/github-pages-deploy-action@v4
-        with:
-          branch: gh-pages
-          folder: dist
-          clean: true
+      - name: Deploy to gh-pages
+        env:
+          GH_PAT: ${{ secrets.GITHUB_TOKEN }}  # GitHub token for authentication
+        run: |
+          cd dist
+          git init
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -m "Deploy to gh-pages"
+          git branch -M gh-pages
+          git remote add origin https://x-access-token:${GH_PAT}@github.com/${{ github.repository }}.git
+          git push -f origin gh-pages
