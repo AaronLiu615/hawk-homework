@@ -36,7 +36,8 @@ cp .env.example .env
 
 # Edit .env file with your MongoDB URI
 # For local: mongodb://localhost:27017/hunter-web-cafe
-# For Atlas: mongodb+srv://username:password@cluster.xxxxx.mongodb.net/hunter-web-cafe
+# For Atlas: mongodb+srv://<YOUR_USERNAME>:<YOUR_PASSWORD>@<CLUSTER>.mongodb.net/hunter-web-cafe
+# Replace <YOUR_USERNAME>, <YOUR_PASSWORD>, and <CLUSTER> with your actual Atlas values
 ```
 
 ## Step 4: Seed Database
