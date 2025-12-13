@@ -25,7 +25,7 @@ jobs:
 
       - name: Build (set VITE_BASE_URL for repo subpath)
         run: |
-          VITE_BASE_URL=/hawk-homework/ npm run build
+          VITE_BASE_URL=/hawk-homework/ VITE_API_URL=https://hawk-homework.onrender.com/api npm run build
 
       - name: Publish to gh-pages
         env:
