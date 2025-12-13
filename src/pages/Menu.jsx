@@ -1,16 +1,63 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { useCart } from '../context/CartContext'
-
-const MENU = [
-  { category: 'Breakfast & Toasts', items: [ ['Avocado Toast', 8], ['Greek Yogurt & Granola', 7], ['Breakfast Croissant', 6] ] },
-  { category: 'Sandwiches & Bowls', items: [ ['Smoked Turkey Panini', 11], ['Caprese Sandwich', 10], ['Quinoa Bowl', 12] ] },
-  { category: 'Pastries & Sweets', items: [ ['Almond Croissant', 4], ['Chocolate Muffin', 3.5], ['Fruit Tart', 5] ] },
-]
-
-const COFFEE = [ ['Espresso',2.5], ['Americano',3.0], ['Latte',4.0], ['Cappuccino',4.0], ['Mocha',4.5], ['Iced Coffee',3.5] ]
+import { menuAPI } from '../services/api'
 
 export default function Menu(){
   const { addToCart } = useCart()
+  const [menuItems, setMenuItems] = useState([])
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState(null)
+
+  useEffect(() => {
+    loadMenuItems()
+  }, [])
+
+  const loadMenuItems = async () => {
+    try {
+      setLoading(true)
+      const items = await menuAPI.getAllItems()
+      setMenuItems(items)
+      setError(null)
+    } catch (err) {
+      console.error('Error loading menu:', err)
+      setError('Failed to load menu items. Please try again later.')
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  // Group menu items by category
+  const groupedMenu = menuItems.reduce((acc, item) => {
+    if (!acc[item.category]) {
+      acc[item.category] = []
+    }
+    acc[item.category].push(item)
+    return acc
+  }, {})
+
+  // Separate coffee items from other categories
+  const coffeeItems = groupedMenu['Coffee Selections'] || []
+  const otherCategories = Object.entries(groupedMenu).filter(([cat]) => cat !== 'Coffee Selections')
+
+  if (loading) {
+    return (
+      <div className="text-center py-5">
+        <div className="spinner-border text-primary" role="status">
+          <span className="visually-hidden">Loading...</span>
+        </div>
+        <p className="mt-2">Loading menu...</p>
+      </div>
+    )
+  }
+
+  if (error) {
+    return (
+      <div className="alert alert-danger" role="alert">
+        {error}
+        <button className="btn btn-sm btn-outline-danger ms-3" onClick={loadMenuItems}>Retry</button>
+      </div>
+    )
+  }
 
   return (
     <div>
@@ -19,18 +66,23 @@ export default function Menu(){
 
       <section className="menu-grid mb-4">
         <div className="row g-3">
-          {MENU.map((col)=> (
-            <div key={col.category} className="col-md-4">
+          {otherCategories.map(([category, items]) => (
+            <div key={category} className="col-md-4">
               <div className="card p-3">
-                <h5>{col.category}</h5>
+                <h5>{category}</h5>
                 <ul className="list-unstyled">
-                  {col.items.map(([name,price])=> (
-                    <li key={name} className="py-2">
+                  {items.map((item) => (
+                    <li key={item._id} className="py-2">
                       <div className="d-flex justify-content-between align-items-center">
-                        <div>{name}</div>
+                        <div>{item.name}</div>
                         <div className="d-flex gap-2">
-                          <div className="fw-semibold">${price}</div>
-                          <button className="btn btn-sm btn-outline-primary" onClick={()=>addToCart(name, price)}>Add</button>
+                          <div className="fw-semibold">${item.price.toFixed(2)}</div>
+                          <button 
+                            className="btn btn-sm btn-outline-primary" 
+                            onClick={() => addToCart(item.name, item.price)}
+                          >
+                            Add
+                          </button>
                         </div>
                       </div>
                     </li>
@@ -42,19 +94,29 @@ export default function Menu(){
         </div>
       </section>
 
-      <section className="menu-table">
-        <h3>Coffee Selections</h3>
-        <div className="row">
-          {COFFEE.map(([name,price])=> (
-            <div key={name} className="col-md-4 mb-2">
-              <div className="d-flex justify-content-between align-items-center border p-2 rounded">
-                <div>{name}</div>
-                <div className="d-flex gap-2 align-items-center"><div className="fw-semibold">${price.toFixed(2)}</div><button className="btn btn-sm btn-outline-primary" onClick={()=>addToCart(name, price)}>Add</button></div>
+      {coffeeItems.length > 0 && (
+        <section className="menu-table">
+          <h3>Coffee Selections</h3>
+          <div className="row">
+            {coffeeItems.map((item) => (
+              <div key={item._id} className="col-md-4 mb-2">
+                <div className="d-flex justify-content-between align-items-center border p-2 rounded">
+                  <div>{item.name}</div>
+                  <div className="d-flex gap-2 align-items-center">
+                    <div className="fw-semibold">${item.price.toFixed(2)}</div>
+                    <button 
+                      className="btn btn-sm btn-outline-primary" 
+                      onClick={() => addToCart(item.name, item.price)}
+                    >
+                      Add
+                    </button>
+                  </div>
+                </div>
               </div>
-            </div>
-          ))}
-        </div>
-      </section>
+            ))}
+          </div>
+        </section>
+      )}
     </div>
   )
 }
