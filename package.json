@@ -6,6 +6,7 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
+    "start": "node server/server.js",
     "server": "node server/server.js",
     "server:dev": "nodemon server/server.js",
     "seed": "node server/scripts/seedMenu.js"
